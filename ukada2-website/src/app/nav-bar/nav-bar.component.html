@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+	<p class="navbar-brand col-md-3 justify-content-start" style="margin-bottom:0">华中师范大学ACM程序设计协会</p>
+
+  <ul class="navbar-nav col-md-6 justify-content-center">
+    <li class="nav-item ">
+      <a class="nav-link" [routerLink]="['/introduction']" routerLinkActive="active">简介</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/apply']" routerLinkActive="active">报名</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/applied-list']" routerLinkActive="active">
+				<div *ngIf="super_identity_enabled; then ApplyList; else PassedList"></div>
+				<ng-template #ApplyList>已报名队伍</ng-template>
+				<ng-template #PassedList>已审核队伍</ng-template>
+			</a>
+    </li>
+  </ul>
+
+	<div *ngIf="user_logged_in; then LoggedIn; else NotLoggedIn"></div>
+	<ng-template #NotLoggedIn>
+	  <ul class="navbar-nav col-md-3 justify-content-end">
+	    <li class="nav-item">
+				<a class="nav-link" [routerLink]="['/register']" routerLinkActive="active">注册</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">登录</a>
+			</li>
+		</ul>
+	</ng-template>
+	<ng-template #LoggedIn>
+		<ul class="navbar-nav col-md-1 justify-content-center">
+			<form class="form-inline" *ngIf="user_is_super">
+				<div class="form-check">
+					<label class="form-check-label" for="enable_super_identity">上帝视角</label>
+					<input class="form-check-input" type="checkbox" name="super_identity_enabled" id="super_identity_enabled" [(ngModel)]="super_identity_enabled" (click)="switch_identity()">
+				</div>
+			</form>
+		</ul>
+		<ul class="navbar-nav col-md-2 justify-content-end">
+				<li class="nav-item">
+					<a class="nav-link" (click)="_service.user_logout()">退出登录</a>
+				</li>
+		</ul>
+	</ng-template>
+
+</nav>

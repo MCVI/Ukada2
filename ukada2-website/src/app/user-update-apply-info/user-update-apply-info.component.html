@@ -1,0 +1,49 @@
+<div class="container jumbotron col-4" style="margin-top: 20px;">
+  <form #apply_form="ngForm" (ngSubmit)="push_apply(apply_form)">
+
+    <h1 class="display-4 text-center">欢迎报名CCNU校赛</h1>
+    <br/>
+
+    <div class="form-group">
+      <label for="school">学校：</label>
+      <input class="form-control" type="text" placeholder="请输入学校" id="school" name="school"
+      #school="ngModel" ngModel required
+      [ngClass]="{'is-valid': school.valid && (school.dirty||school.touched), 'is-invalid': school.invalid && (school.dirty||school.touched)}">
+    </div>
+
+    <div class="form-group">
+      <label for="team_name">队名：</label>
+      <input class="form-control" type="text" placeholder="请输入队名" id="team_name" name="team_name"
+      #team_name="ngModel" ngModel required
+      [ngClass]="{'is-valid': team_name.valid && (team_name.dirty||team_name.touched), 'is-invalid': team_name.invalid && (team_name.dirty||team_name.touched)}">
+    </div>
+
+    <div class="form-group">
+      <label for="team_leader">队长：</label>
+      <input [(ngModel)]="team_leader" class="form-control" type="text" placeholder="请输入队长姓名" id="team_leader" name="team_leader">
+    </div>
+
+    <div class="form-group">
+      <label for="team_member1">队员：</label>
+      <input [(ngModel)]="team_member1" class="form-control" type="text" placeholder="请输入队员姓名" id="team_member1" name="team_member1">
+    </div>
+
+    <div class="form-group">
+      <label for="team_member2">队员：</label>
+      <input [(ngModel)]="team_member2" class="form-control" type="text" placeholder="请输入队员姓名" id="team_member2" name="team_member2">
+    </div>
+
+    <div class="form-group">
+      <label for="phone">联系电话：</label>
+      <input [(ngModel)]="phone" class="form-control" type="tel" placeholder="请输入用于联系的电话号码" id="phone" name="phone">
+    </div>
+
+    <div class="form-group">
+      <label for="qq">QQ：</label>
+      <input [(ngModel)]="qq" class="form-control" type="text" placeholder="请输入用于联系的QQ号码" id="qq" name="qq">
+    </div>
+
+    <button class="btn btn-primary col-12" style="margin-top: 20px;">提交报名信息</button>
+
+  </form>
+</div>

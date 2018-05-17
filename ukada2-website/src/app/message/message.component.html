@@ -1,0 +1,9 @@
+<div *ngIf="_message.message_visible" class="alert" [ngClass]="{
+  'alert-danger': _message.current_message_type===message_type.error,
+  'alert-warning': _message.current_message_type===message_type.warning,
+  'alert-success': _message.current_message_type===message_type.success,
+  'alert-info': _message.current_message_type===message_type.info
+}">
+  {{ _message.current_message }}
+  <a href="javascript:;" class="close" (click)="_message.hide_current_message()">&times;</a>
+</div>
