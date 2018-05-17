@@ -18,7 +18,7 @@ export class ApplyComponent implements OnInit {
   apply_view = apply_view;
 
   current_apply_view: apply_view;
-  apply_info: object;
+  apply_info: ApplyInfo|null;
 
   constructor(
     private _shared: SharedService,
@@ -61,5 +61,9 @@ export class ApplyComponent implements OnInit {
         }
       },
     );
+  }
+
+  private switch_to_edit($event) {
+    this.current_apply_view = apply_view.edit_apply_info;
   }
 }

@@ -7,43 +7,60 @@
     <div class="form-group">
       <label for="school">学校：</label>
       <input class="form-control" type="text" placeholder="请输入学校" id="school" name="school"
-      #school="ngModel" ngModel required
-      [ngClass]="{'is-valid': school.valid && (school.dirty||school.touched), 'is-invalid': school.invalid && (school.dirty||school.touched)}">
+      #school="ngModel" [(ngModel)]="form_value.school" required
+      [ngClass]="{'is-valid': school.valid && (school.dirty||school.touched), 'is-invalid': school.invalid && (school.dirty||school.touched)}"
+      >
     </div>
 
     <div class="form-group">
       <label for="team_name">队名：</label>
       <input class="form-control" type="text" placeholder="请输入队名" id="team_name" name="team_name"
-      #team_name="ngModel" ngModel required
-      [ngClass]="{'is-valid': team_name.valid && (team_name.dirty||team_name.touched), 'is-invalid': team_name.invalid && (team_name.dirty||team_name.touched)}">
+      #team_name="ngModel" [(ngModel)]="form_value.team_name" required
+      [ngClass]="{'is-valid': team_name.valid && (team_name.dirty||team_name.touched), 'is-invalid': team_name.invalid && (team_name.dirty||team_name.touched)}"
+      >
     </div>
 
     <div class="form-group">
       <label for="team_leader">队长：</label>
-      <input [(ngModel)]="team_leader" class="form-control" type="text" placeholder="请输入队长姓名" id="team_leader" name="team_leader">
+      <input class="form-control" type="text" placeholder="请输入队长姓名" id="team_leader" name="team_leader"
+      #team_leader="ngModel" [(ngModel)]="form_value.team_leader" required
+      [ngClass]="{'is-valid': team_leader.valid && (team_leader.dirty||team_leader.touched), 'is-invalid': team_leader.invalid && (team_leader.dirty||team_leader.touched)}"
+      >
     </div>
 
     <div class="form-group">
       <label for="team_member1">队员：</label>
-      <input [(ngModel)]="team_member1" class="form-control" type="text" placeholder="请输入队员姓名" id="team_member1" name="team_member1">
+      <input class="form-control" type="text" placeholder="请输入队员姓名" id="team_member1" name="team_member1"
+      #team_member1="ngModel" [(ngModel)]="form_value.team_member1" required
+      [ngClass]="{'is-valid': team_member1.valid && (team_member1.dirty||team_member1.touched), 'is-invalid': team_member1.invalid && (team_member1.dirty||team_member1.touched)}"
+      >
     </div>
 
     <div class="form-group">
       <label for="team_member2">队员：</label>
-      <input [(ngModel)]="team_member2" class="form-control" type="text" placeholder="请输入队员姓名" id="team_member2" name="team_member2">
+      <input class="form-control" type="text" placeholder="请输入队员姓名" id="team_member2" name="team_member2"
+      #team_member2="ngModel" [(ngModel)]="form_value.team_member2" required
+      [ngClass]="{'is-valid': team_member2.valid && (team_member2.dirty||team_member2.touched), 'is-invalid': team_member2.invalid && (team_member2.dirty||team_member2.touched)}"
+      >
     </div>
 
     <div class="form-group">
       <label for="phone">联系电话：</label>
-      <input [(ngModel)]="phone" class="form-control" type="tel" placeholder="请输入用于联系的电话号码" id="phone" name="phone">
+      <input class="form-control" type="text" placeholder="请输入用于联系的电话号码" id="phone" name="phone"
+      #phone="ngModel" [(ngModel)]="form_value.phone" required pattern="[0-9]{7,}"
+      [ngClass]="{'is-valid': phone.valid && (phone.dirty||phone.touched), 'is-invalid': phone.invalid && (phone.dirty||phone.touched)}"
+      >
     </div>
 
     <div class="form-group">
       <label for="qq">QQ：</label>
-      <input [(ngModel)]="qq" class="form-control" type="text" placeholder="请输入用于联系的QQ号码" id="qq" name="qq">
+      <input class="form-control" type="text" placeholder="请输入用于联系的QQ号码" id="qq" name="qq"
+      #qq="ngModel" [(ngModel)]="form_value.qq" required pattern="[0-9]{5,}"
+      [ngClass]="{'is-valid': qq.valid && (qq.dirty||qq.touched), 'is-invalid': qq.invalid && (qq.dirty||qq.touched)}"
+      >
     </div>
 
-    <button class="btn btn-primary col-12" style="margin-top: 20px;">提交报名信息</button>
+    <button class="btn btn-primary col-12" style="margin-top: 20px;" [disabled]="apply_form.form.invalid">提交报名信息</button>
 
   </form>
 </div>

@@ -12,8 +12,9 @@ import { apply_view } from '../apply/apply.component';
   styleUrls: ['./user-update-apply-info.component.css']
 })
 export class UserUpdateApplyInfoComponent implements OnInit {
-  @Input("apply_info") apply_info: ApplyInfo;
-  @Input("current_view") current_view: apply_view;
+  @Input("apply_info") apply_info: ApplyInfo|null;
+
+  form_value: object;
 
   constructor(
     private _shared: SharedService,
@@ -21,7 +22,23 @@ export class UserUpdateApplyInfoComponent implements OnInit {
     private _router: Router
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    const apply_info_keys = ["school", "team_name", "team_leader", "team_member1", "team_member2", "phone", "qq"];
+    this.form_value = { };
+    if(this.apply_info){
+      for(let k of apply_info_keys){
+        if((typeof this.apply_info[k]) === "string"){
+          this.form_value[k] = this.apply_info[k];
+        }else{
+          this.form_value[k] = "";
+        }
+      }
+    }else{
+      for(let k of apply_info_keys){
+        this.form_value[k] = "";
+      }
+    }
+  }
 
   private push_apply(f: NgForm): void{
     this._shared.http_update_user_apply_info(f.value).subscribe(
@@ -36,7 +53,6 @@ export class UserUpdateApplyInfoComponent implements OnInit {
       },
       () => {
         this._message.success("报名信息提交成功：请等待管理员审核");
-        this.current_view = apply_view.display_apply_info;
       },
     )
   }

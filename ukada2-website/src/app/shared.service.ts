@@ -74,7 +74,9 @@ export class ApplyInfo {
     let data = new FormData();
 
     for(let k of ApplyInfo.info_keys){
-      data.append(k, this[k]);
+      if(k!=="passed"){
+        data.append(k, this[k]);
+      }
     }
     return data;
   }
@@ -416,7 +418,6 @@ export class SharedService {
 
   public http_update_user_apply_info(o: object): Observable<any>{
     let info = ApplyInfo.fromObject(o);
-    console.log(info);
     let data = info.toFormData();
     return new Observable((observer) => {
       let s_update: Subscription|undefined = undefined;
@@ -457,7 +458,10 @@ export class SharedService {
           let headers;
           let is_admin: boolean;
 
-          if((next instanceof User)||(next===user_operation_error.not_logged_in)){
+          if((next instanceof User)
+            ||(next===user_operation_error.not_logged_in)
+            ||(next===user_operation_error.auth_fail)
+          ){
             if(next instanceof User){
               let user = next;
               headers = this.auth_header(user.token, user.priv_level);

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { SharedService, ApplyInfo, user_operation_error } from '../shared.service';
 import { MessageService } from '../message.service';
@@ -11,7 +11,7 @@ import { apply_view } from '../apply/apply.component';
 })
 export class UserApplyInfoComponent implements OnInit {
   @Input("apply_info") apply_info: ApplyInfo;
-  @Input("current_view") current_view: apply_view;
+  @Output("switch_to_edit") switch_to_edit = new EventEmitter();
 
   constructor(
     private _shared: SharedService,
@@ -21,6 +21,6 @@ export class UserApplyInfoComponent implements OnInit {
   ngOnInit() { }
 
   update_apply_info() {
-    this.current_view = apply_view.edit_apply_info;
+    this.switch_to_edit.emit();
   }
 }
