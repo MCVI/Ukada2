@@ -1,0 +1,44 @@
+.full {
+  background-color: #e9ecef;
+  min-height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.full .container {
+  background-color: #fff;
+  margin-top: 40px !important;
+  padding: 3rem 5rem;
+}
+
+.apply-title {
+  margin-bottom: 20px;
+  color: #33ccff;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  margin-bottom: 1rem;
+  color: #33ccff;
+}
+
+.btn-submit {
+  color: #fff;
+  background-color: #33ccff;
+}
+
+input::-webkit-input-placeholder{
+  color: #999;
+}
+input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+  color: #999;
+}
+input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+  color: #999;
+}
+input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+  color: #999;
+}

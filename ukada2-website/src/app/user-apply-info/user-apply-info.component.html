@@ -1,9 +1,9 @@
-<div class="container jumbotron col-4" style="margin-top: 20px;">
-    <h1 class="display-4 text-center">报名信息</h1>
-    <br/>
+<div class="full">
+  <div class="container jumbotron col-6">
+    <h4 class="text-center apply-title">报名信息</h4>
 
-    <div *ngIf="!apply_info.passed">
-      未通过审核
+    <div *ngIf="!apply_info.passed" class="text-center" style="margin: 15px 0;">
+      <strong>待审核</strong>
     </div>
 
     <div class="form-group">
@@ -35,10 +35,10 @@
     </div>
 
     <div *ngIf="apply_info.passed">
-      <button class="btn btn-primary col-12" style="margin-top: 20px;" disabled>已通过审核，不能再更改</button>
+      <button class="btn btn-submit col-12" style="margin-top: 20px;" disabled>已通过审核，不能再更改</button>
     </div>
     <div *ngIf="!apply_info.passed">
-      <button class="btn btn-primary col-12" style="margin-top: 20px;" (click)="update_apply_info()">更改报名信息</button>
+      <button class="btn btn-submit col-12" style="margin-top: 20px;" (click)="update_apply_info()">更改报名信息</button>
     </div>
-
+  </div>
 </div>

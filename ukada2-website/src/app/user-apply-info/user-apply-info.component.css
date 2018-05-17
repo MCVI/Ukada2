@@ -1,0 +1,27 @@
+.full {
+  background-color: #e9ecef;
+  min-height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.full .container {
+  background-color: #fff;
+  margin-top: 40px !important;
+  padding: 3rem 5rem;
+}
+
+.apply-title {
+  margin-bottom: 20px;
+  color: #33ccff;
+}
+
+.form-group label {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.btn-submit {
+  color: #fff;
+  background-color: #33ccff;
+}
