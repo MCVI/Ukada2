@@ -79,4 +79,26 @@ export class AppliedListComponent implements OnInit {
   private switch_to_next_page() {
     this.switch_to_page(Math.min(this.current_page_num+1,this.total_page_num));
   }
+
+  private apply_set_passed_status(id:number, passed: boolean) {
+    this._shared.http_apply_set_passed_status(id, passed).subscribe(
+      next => { },
+      error => {
+        if(error===user_operation_error.network_error){
+          this._message.error("审核操作失败：网络错误");
+        }else{
+          this._message.error("审核操作失败：未知错误");
+        }
+      },
+      () => {
+        this.switch_to_page(this.current_page_num);
+      },
+    );
+  }
+  private revoke_apply(id: number){
+    this.apply_set_passed_status(id, false);
+  }
+  private pass_apply(id: number){
+    this.apply_set_passed_status(id, true);
+  }
 }

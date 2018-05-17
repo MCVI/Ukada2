@@ -9,7 +9,7 @@ const api_url_base: string = "/api";
 const MCVI_PASSWD_PREFIX_PUBLIC="MCVI-PRE-PUBLIC";
 
 export enum user_operation_error{
-  unknown_error, network_error, not_logged_in, auth_fail, not_exist, already_exist
+  unknown_error, network_error, not_logged_in, auth_fail, not_exist, already_exist, permission_deniend
 }
 
 export function uuid4() {
@@ -39,9 +39,15 @@ export class User {
 
     return u;
   }
+  static justID(id: number): User{
+    let u = new User();
+    u.id=id;
+    return u;
+  }
 }
 
 export class ApplyInfo {
+  id: number;
   school: string;
   team_name: string;
   team_leader: string;
@@ -60,6 +66,7 @@ export class ApplyInfo {
     for(let k of this.info_keys){
       info[k] = o[k];
     }
+    info.id = o["id"];
     return info;
   }
   static fromObject(o: object): ApplyInfo{
@@ -75,7 +82,7 @@ export class ApplyInfo {
 
     for(let k of ApplyInfo.info_keys){
       if(k!=="passed"){
-        data.append(k, this[k]);
+        data.append(k, String(this[k]));
       }
     }
     return data;
@@ -310,7 +317,7 @@ export class SharedService {
       );
       return {unsubscribe() {
         for(let s of [s_login, s_salt]){
-          if(s!==undefined)s.unsubscribe();
+          if(s instanceof Subscription)s.unsubscribe();
         }
       }};
     });
@@ -445,7 +452,7 @@ export class SharedService {
       );
       return {unsubscribe() {
         for(let s of [s_update, s_user]){
-          if(s!==undefined)s.unsubscribe();
+          if(s instanceof Subscription)s.unsubscribe();
         }
       }};
     });
@@ -500,10 +507,47 @@ export class SharedService {
       );
       return {unsubscribe() {
         for(let s of [s_req, s_user]){
-          if(s!=undefined)s.unsubscribe();
+          if(s instanceof Subscription)s.unsubscribe();
         }
       }};
     });
   }
 
+  public http_apply_set_passed_status(user_id:number, target_status: boolean): Observable<any>{
+    return new Observable((observer) => {
+      let s_req: Subscription|undefined = undefined;
+      let s_user = this.user_info.subscribe(
+        next => {
+          if(next instanceof User){
+            let user = next;
+            if(user.priv_level==="Super"){
+              let headers = this.auth_header(user.token, user.priv_level);
+              let form_data = new FormData();
+              form_data.append("passed", String(target_status));
+              s_req = this._http.post(this.user_apply_info_url(User.justID(user_id)), form_data, {
+                responseType: "json",
+                headers: headers,
+              }).subscribe(
+                response => {
+                  observer.complete();
+                },
+                error => {
+                  observer.error(user_operation_error.network_error);
+                },
+              );
+            }else{
+              observer.error(user_operation_error.permission_deniend);
+            }
+          }else{
+            observer.error(next);
+          }
+        },
+      );
+      return {unsubscribe() {
+        for(let s of [s_req, s_user]){
+          if(s instanceof Subscription)s.unsubscribe();
+        }
+      }};
+    });
+  }
 }

@@ -60,6 +60,8 @@
             <th scope="col">队员</th>
             <th scope="col">联系电话</th>
             <th scope="col">QQ</th>
+            <th scope="col">审核状态</th>
+            <th scope="col">审核</th>
           </tr>
         </thead>
         <tbody>
@@ -71,9 +73,44 @@
             <td>{{ item.team_member2 }}</td>
             <td>{{ item.phone }}</td>
             <td>{{ item.qq }}</td>
+            <td>
+              <div *ngIf="item.passed">
+                已通过
+              </div>
+              <div *ngIf="!item.passed">
+                未通过
+              </div>
+            </td>
+            <td>
+              <div *ngIf="item.passed">
+                <button class="btn" (click)="revoke_apply(item.id)">撤销</button>
+              </div>
+              <div *ngIf="!item.passed">
+                <button class="btn" (click)="pass_apply(item.id)">通过</button>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
+    <nav aria-label="Pagination">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" aria-label="Previous" (click)="switch_to_previous_page()">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <li class="page-item" *ngFor="let i of available_pages">
+          <a class="page-link" (click)="switch_to_page(i)">{{ i }}</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" aria-label="Next" (click)="switch_to_next_page()">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </div>

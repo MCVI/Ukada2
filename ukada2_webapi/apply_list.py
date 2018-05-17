@@ -36,6 +36,7 @@ def get_apply_list(page_index: int):
         res_record = {
             item: content[item] for item in visible_item
         }
+        res_record["id"] = record.user_id
         res_record["passed"] = record.passed
         res.append(res_record)
 
