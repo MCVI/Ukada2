@@ -1,10 +1,47 @@
 .full {
   background-color: #e9ecef;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
-  position: fixed;
+  position: absolute;
 }
 .full .container {
   background-color: #ffffff;
   margin-top: 40px !important;
+  padding: 3rem 3rem;
+}
+
+.main-title {
+  margin: 1rem;
+}
+
+.introduction-index {
+  height: 50px;
+  margin: 15px 0;
+  background-color: #33ccff;
+}
+
+.index-list{
+  flex-direction: row;
+  display: flex;
+  list-style-type: none;
+  padding: 15px 0;
+}
+
+.index-item {
+  color: #fff;
+}
+
+.block {
+  padding: 25px 3rem;
+}
+
+.block-special-background {
+  background-color: rgb(236,250,255);
+}
+
+.block-title {
+  margin: 5px 0 30px 0;
+}
+
+.block-content {
 }
