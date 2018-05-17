@@ -1,0 +1,10 @@
+.full {
+  background-color: #e9ecef;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+}
+.full .container {
+  background-color: #ffffff;
+  margin-top: 40px !important;
+}
