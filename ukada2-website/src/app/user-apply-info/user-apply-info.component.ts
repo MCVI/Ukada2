@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
-import { SharedService, user_operation_error } from '../shared.service';
+import { SharedService, ApplyInfo, user_operation_error } from '../shared.service';
 import { MessageService } from '../message.service';
+import { apply_view } from '../apply/apply.component';
 
 @Component({
   selector: 'app-user-apply-info',
@@ -9,6 +10,8 @@ import { MessageService } from '../message.service';
   styleUrls: ['./user-apply-info.component.css']
 })
 export class UserApplyInfoComponent implements OnInit {
+  @Input("apply_info") apply_info: ApplyInfo;
+  @Input("current_view") current_view: apply_view;
 
   constructor(
     private _shared: SharedService,
@@ -17,4 +20,7 @@ export class UserApplyInfoComponent implements OnInit {
 
   ngOnInit() { }
 
+  update_apply_info() {
+    this.current_view = apply_view.edit_apply_info;
+  }
 }

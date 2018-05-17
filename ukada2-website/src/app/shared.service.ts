@@ -53,7 +53,7 @@ export class ApplyInfo {
 
   private constructor() { }
 
-  static info_keys: string[] = ["school", "team_name", "team_leader", "team_member1", "team_member2", "phone", "qq"];
+  static info_keys: string[] = ["school", "team_name", "team_leader", "team_member1", "team_member2", "phone", "qq", "passed"];
   static fromResponseObject(o: object): ApplyInfo{
     let info = new ApplyInfo();
 

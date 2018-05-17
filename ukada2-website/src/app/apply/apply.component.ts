@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { SharedService, ApplyInfo, user_operation_error } from '../shared.service';
 import { MessageService } from '../message.service';
 
-enum apply_view{
+export enum apply_view{
   loading_apply_info, load_apply_info_failed, display_apply_info, edit_apply_info
 };
 

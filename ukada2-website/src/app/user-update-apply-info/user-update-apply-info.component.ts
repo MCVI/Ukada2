@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { SharedService, user_operation_error } from '../shared.service';
+import { SharedService, ApplyInfo, user_operation_error } from '../shared.service';
 import { MessageService } from '../message.service';
+import { apply_view } from '../apply/apply.component';
 
 @Component({
   selector: 'app-user-update-apply-info',
@@ -11,6 +12,8 @@ import { MessageService } from '../message.service';
   styleUrls: ['./user-update-apply-info.component.css']
 })
 export class UserUpdateApplyInfoComponent implements OnInit {
+  @Input("apply_info") apply_info: ApplyInfo;
+  @Input("current_view") current_view: apply_view;
 
   constructor(
     private _shared: SharedService,
@@ -33,7 +36,7 @@ export class UserUpdateApplyInfoComponent implements OnInit {
       },
       () => {
         this._message.success("报名信息提交成功：请等待管理员审核");
-        this._router.navigate(["/"]);
+        this.current_view = apply_view.display_apply_info;
       },
     )
   }

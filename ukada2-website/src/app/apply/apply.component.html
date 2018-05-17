@@ -6,11 +6,11 @@
     加载失败
   </div>
   <div *ngSwitchCase="apply_view.display_apply_info">
-    <app-user-apply-info>
+    <app-user-apply-info [(current_view)]="current_apply_view" [apply_info]="apply_info">
     </app-user-apply-info>
   </div>
   <div *ngSwitchCase="apply_view.edit_apply_info">
-    <app-user-update-apply-info>
+    <app-user-update-apply-info [(current_view)]="current_apply_view" [apply_info]="apply_info">
     </app-user-update-apply-info>
   </div>
 </div>
