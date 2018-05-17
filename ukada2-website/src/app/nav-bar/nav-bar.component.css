@@ -1,7 +1,18 @@
-.navbar {
-  
+.nav-link {
+  color: #33ccff !important;
+  font-size: 15px;
 }
 
-.container {
+.nav-link.active {
+  font-weight: bold;
+}
+
+.navbar-brand {
+  color: #33ccff !important;
+  font-weight: bold;
+}
+
+.navbar .container {
   max-width: 1140px;
+  padding: 0 3rem;
 }
