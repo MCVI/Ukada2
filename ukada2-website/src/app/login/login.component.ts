@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  private user_login(f: NgForm): void{
+  public user_login(f: NgForm): void{
     this._shared.user_login(f.value["email"], f.value["password"]).subscribe(
       next => { },
       error => {

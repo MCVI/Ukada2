@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  private user_register(f: NgForm): void{
+  public user_register(f: NgForm): void{
     this._shared.user_register(f.value["email"], f.value["password"]).subscribe(
       next => { },
       error => {

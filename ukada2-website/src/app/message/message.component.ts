@@ -10,7 +10,7 @@ import { MessageService, message_type } from '../message.service';
 export class MessageComponent implements OnInit {
   message_type = message_type;
 
-  constructor(private _message: MessageService) { }
+  constructor(public _message: MessageService) { }
 
   ngOnInit() {
   }

@@ -14,7 +14,7 @@ import { apply_view } from '../apply/apply.component';
 export class UserUpdateApplyInfoComponent implements OnInit {
   @Input("apply_info") apply_info: ApplyInfo|null;
 
-  form_value: object;
+  form_value;
 
   constructor(
     private _shared: SharedService,
@@ -40,7 +40,7 @@ export class UserUpdateApplyInfoComponent implements OnInit {
     }
   }
 
-  private push_apply(f: NgForm): void{
+  public push_apply(f: NgForm): void{
     this._shared.http_update_user_apply_info(f.value).subscribe(
       next => { },
 

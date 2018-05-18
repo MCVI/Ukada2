@@ -6,7 +6,7 @@ export enum message_type{
 
 @Injectable()
 export class MessageService {
-  protected message_visible: boolean;
+  public message_visible: boolean;
 
   protected current_message_type: message_type;
   protected current_message: string;
