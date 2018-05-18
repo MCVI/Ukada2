@@ -83,10 +83,10 @@
             </td>
             <td>
               <div *ngIf="item.passed">
-                <button class="btn" (click)="revoke_apply(item.id)">撤销</button>
+                <button class="btn btn-warning" (click)="revoke_apply(item.id)" style="padding:0;">撤销</button>
               </div>
               <div *ngIf="!item.passed">
-                <button class="btn" (click)="pass_apply(item.id)">通过</button>
+                <button class="btn btn-success" (click)="pass_apply(item.id)" style="padding:0;">通过</button>
               </div>
             </td>
           </tr>

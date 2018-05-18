@@ -31,10 +31,10 @@
 			</ul>
 		</ng-template>
 		<ng-template #LoggedIn>
-			<ul class="navbar-nav col-md-1 justify-content-center">
+			<ul class="navbar-nav col-md-4 justify-content-center">
 				<form class="form-inline" *ngIf="user_is_super">
 					<div class="form-check">
-						<label class="form-check-label" for="enable_super_identity">上帝视角</label>
+						<label class="form-check-label super-identity-label" for="enable_super_identity">上帝视角</label>
 						<input class="form-check-input" type="checkbox" name="super_identity_enabled" id="super_identity_enabled" [(ngModel)]="super_identity_enabled" (click)="switch_identity()">
 					</div>
 				</form>
