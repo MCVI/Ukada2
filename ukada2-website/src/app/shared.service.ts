@@ -5,8 +5,7 @@ import * as CryptoJS from 'crypto-js';
 
 import { HttpStatusCode } from './http-status-code';
 
-const api_url_base: string = "/api";
-const MCVI_PASSWD_PREFIX_PUBLIC="MCVI-PRE-PUBLIC";
+import { api_url_base, MCVI_PASSWD_PREFIX_PUBLIC } from '../mcvi.conf';
 
 export enum user_operation_error{
   unknown_error, network_error, not_logged_in, auth_fail, not_exist, already_exist, permission_deniend
