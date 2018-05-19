@@ -46,3 +46,7 @@ a:hover, a:visited, a:link, a:active {
 
 .block-content {
 }
+
+.paragraph {
+  text-indent: 2em;
+}
