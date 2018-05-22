@@ -14,7 +14,7 @@
       <div class="form-group">
         <label for="team_name">队名：</label>
         <input class="form-control" type="text" placeholder="请输入队名" id="team_name" name="team_name"
-        #team_name="ngModel" [(ngModel)]="form_value.team_name" required
+        #team_name="ngModel" [(ngModel)]="form_value.team_name" required maxlength="14"
         [ngClass]="{'is-valid': team_name.valid && (team_name.dirty||team_name.touched), 'is-invalid': team_name.invalid && (team_name.dirty||team_name.touched)}"
         >
       </div>
