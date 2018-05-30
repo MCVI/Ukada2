@@ -152,7 +152,9 @@ def export_to_excel():
 
             bytes = BytesIO()
             wbk.save(bytes)
-            return bytes.getvalue()
+            value = bytes.getvalue()
+            bytes.close()
+            return value
 
         else:
             response.json(response.Conflict, unknown_school=unknown_school)

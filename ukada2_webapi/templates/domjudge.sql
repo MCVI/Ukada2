@@ -1,7 +1,7 @@
 {% autoescape false %}
 DELETE FROM team_affiliation;
 
---INSERT INTO team_affiliation(affilid, shortname, name) VALUES(1, 'NULL', '未知学校');
+-- INSERT INTO team_affiliation(affilid, shortname, name) VALUES(1, 'NULL', '未知学校');
 {% for school in school_list %}
 INSERT INTO team_affiliation(affilid, shortname, name) VALUES({{ school.id }}, '{{ school.abbreviation }}', '{{ school.name }}');
 {% endfor %}
