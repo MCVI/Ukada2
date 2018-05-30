@@ -101,4 +101,46 @@ export class AppliedListComponent implements OnInit {
   private pass_apply(id: number){
     this.apply_set_passed_status(id, true);
   }
+  private click_url(url: string, target?: string, download?: string){
+    let a = document.createElement("a");
+    a.href = url;
+    if(target!==undefined){
+      a.target = target;
+    }
+    if(download!==undefined){
+      a.download = download;
+    }
+    a.click();
+  }
+  private download_blob(data: Blob, download: string){
+    this.click_url(URL.createObjectURL(data), "_blank", download);
+  }
+  private export_to_domjudge(){
+    this._shared.http_export_to_domjudge_sql().subscribe(
+      data => {
+        this.download_blob(data,"domjudge.sql");
+      },
+      error => {
+        if(error===user_operation_error.network_error){
+          this._message.error("导出失败：网络错误");
+        }else{
+          this._message.error("导出失败：未知错误");
+        }
+      },
+    );
+  }
+  private export_to_excel(){
+    this._shared.http_export_to_excel_xls().subscribe(
+      data => {
+        this.download_blob(data,"excel.xls");
+      },
+      error => {
+        if(error===user_operation_error.network_error){
+          this._message.error("导出失败：网络错误");
+        }else{
+          this._message.error("导出失败：未知错误");
+        }
+      },
+    );
+  }
 }

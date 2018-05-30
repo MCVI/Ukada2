@@ -8,7 +8,7 @@ import { HttpStatusCode } from './http-status-code';
 import { api_url_base, MCVI_PASSWD_PREFIX_PUBLIC } from '../mcvi.conf';
 
 export enum user_operation_error{
-  unknown_error, network_error, not_logged_in, auth_fail, not_exist, already_exist, permission_deniend
+  unknown_error, network_error, not_logged_in, auth_fail, not_exist, already_exist, permission_deniend, unknown_school
 }
 
 export function uuid4() {
@@ -548,5 +548,82 @@ export class SharedService {
         }
       }};
     });
+  }
+
+  public http_export_to_domjudge_sql(): Observable<Blob>{
+    return new Observable((observer) => {
+      let s_req: Subscription|undefined = undefined;
+      let s_user = this.user_info.subscribe(
+        next => {
+          if(next instanceof User){
+            let user = next;
+            if(user.priv_level==="Super"){
+              let headers = this.auth_header(user.token, user.priv_level);
+              s_req = this._http.get(api_url_base+"/apply_list/export/domjudge.sql", {
+                responseType: 'blob',
+                headers: headers,
+              }).subscribe(
+                response => {
+                  observer.next(response);
+                  observer.complete();
+                },
+                error => {
+                  if(error.status===HttpStatusCode.Conflict){
+                    observer.error(user_operation_error.unknown_school);
+                  }else{
+                    observer.error(user_operation_error.network_error);
+                  }
+                },
+              );
+            }else{
+              observer.error(user_operation_error.permission_deniend);
+            }
+          }
+        },
+      );
+      return {unsubscribe() {
+        for(let s of [s_req, s_user]){
+          if(s instanceof Subscription)s.unsubscribe();
+        }
+      }};
+    })
+  }
+  public http_export_to_excel_xls(): Observable<Blob>{
+    return new Observable((observer) => {
+      let s_req: Subscription|undefined = undefined;
+      let s_user = this.user_info.subscribe(
+        next => {
+          if(next instanceof User){
+            let user = next;
+            if(user.priv_level==="Super"){
+              let headers = this.auth_header(user.token, user.priv_level);
+              s_req = this._http.get(api_url_base+"/apply_list/export/excel.xls", {
+                responseType: 'blob',
+                headers: headers,
+              }).subscribe(
+                response => {
+                  observer.next(response);
+                  observer.complete();
+                },
+                error => {
+                  if(error.status===HttpStatusCode.Conflict){
+                    observer.error(user_operation_error.unknown_school);
+                  }else{
+                    observer.error(user_operation_error.network_error);
+                  }
+                },
+              );
+            }else{
+              observer.error(user_operation_error.permission_deniend);
+            }
+          }
+        },
+      );
+      return {unsubscribe() {
+        for(let s of [s_req, s_user]){
+          if(s instanceof Subscription)s.unsubscribe();
+        }
+      }};
+    })
   }
 }

@@ -49,6 +49,13 @@
     </nav>
   </div>
   <div *ngSwitchCase="applied_list_view.admin_view">
+    <div style="float: right;">
+      <div style="float: none; text-align: right;">
+        <button class="btn btn-primary" (click)="export_to_excel()">导出到Excel</button>
+        <br>
+        <button class="btn btn-primary" (click)="export_to_domjudge()">导出到DOMjudge</button>
+      </div>
+    </div>
     <div class="container">
       <table class="table">
         <thead>

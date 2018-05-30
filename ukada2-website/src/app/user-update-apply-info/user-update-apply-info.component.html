@@ -6,7 +6,7 @@
       <div class="form-group">
         <label for="school">学校：</label>
         <input class="form-control" type="text" placeholder="请输入学校" id="school" name="school"
-        #school="ngModel" [(ngModel)]="form_value.school" required
+        #school="ngModel" [(ngModel)]="form_value.school" required maxlength="20"
         [ngClass]="{'is-valid': school.valid && (school.dirty||school.touched), 'is-invalid': school.invalid && (school.dirty||school.touched)}"
         >
       </div>
@@ -22,7 +22,7 @@
       <div class="form-group">
         <label for="team_leader">队长：</label>
         <input class="form-control" type="text" placeholder="请输入队长姓名" id="team_leader" name="team_leader"
-        #team_leader="ngModel" [(ngModel)]="form_value.team_leader" required
+        #team_leader="ngModel" [(ngModel)]="form_value.team_leader" required maxlength="10"
         [ngClass]="{'is-valid': team_leader.valid && (team_leader.dirty||team_leader.touched), 'is-invalid': team_leader.invalid && (team_leader.dirty||team_leader.touched)}"
         >
       </div>
@@ -30,7 +30,7 @@
       <div class="form-group">
         <label for="team_member1">队员：</label>
         <input class="form-control" type="text" placeholder="请输入队员姓名" id="team_member1" name="team_member1"
-        #team_member1="ngModel" [(ngModel)]="form_value.team_member1" required
+        #team_member1="ngModel" [(ngModel)]="form_value.team_member1" required maxlength="10"
         [ngClass]="{'is-valid': team_member1.valid && (team_member1.dirty||team_member1.touched), 'is-invalid': team_member1.invalid && (team_member1.dirty||team_member1.touched)}"
         >
       </div>
@@ -38,7 +38,7 @@
       <div class="form-group">
         <label for="team_member2">队员：</label>
         <input class="form-control" type="text" placeholder="请输入队员姓名" id="team_member2" name="team_member2"
-        #team_member2="ngModel" [(ngModel)]="form_value.team_member2" required
+        #team_member2="ngModel" [(ngModel)]="form_value.team_member2" required maxlength="10"
         [ngClass]="{'is-valid': team_member2.valid && (team_member2.dirty||team_member2.touched), 'is-invalid': team_member2.invalid && (team_member2.dirty||team_member2.touched)}"
         >
       </div>
@@ -46,7 +46,7 @@
       <div class="form-group">
         <label for="phone">联系电话：</label>
         <input class="form-control" type="text" placeholder="请输入用于联系的电话号码" id="phone" name="phone"
-        #phone="ngModel" [(ngModel)]="form_value.phone" required pattern="[0-9]{7,}"
+        #phone="ngModel" [(ngModel)]="form_value.phone" required pattern="[0-9]{7,12}"
         [ngClass]="{'is-valid': phone.valid && (phone.dirty||phone.touched), 'is-invalid': phone.invalid && (phone.dirty||phone.touched)}"
         >
       </div>
@@ -54,7 +54,7 @@
       <div class="form-group">
         <label for="qq">QQ：</label>
         <input class="form-control" type="text" placeholder="请输入用于联系的QQ号码" id="qq" name="qq"
-        #qq="ngModel" [(ngModel)]="form_value.qq" required pattern="[0-9]{5,}"
+        #qq="ngModel" [(ngModel)]="form_value.qq" required pattern="[0-9]{5,13}"
         [ngClass]="{'is-valid': qq.valid && (qq.dirty||qq.touched), 'is-invalid': qq.invalid && (qq.dirty||qq.touched)}"
         >
       </div>

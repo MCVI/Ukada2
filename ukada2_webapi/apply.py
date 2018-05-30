@@ -1,6 +1,7 @@
+import random
 from flask import json, g, request
 import peewee
-from peewee import ForeignKeyField, TextField, BooleanField
+from peewee import ForeignKeyField, TextField, BooleanField, FloatField
 from .util import response
 from .util.response import Success, NotFound, BadRequest, Forbidden
 from .server import db_transaction_succeeded
@@ -23,6 +24,7 @@ content_item_list = [
 
 class ApplyInfo(BaseModel):
     user = ForeignKeyField(User, null=False, primary_key=True)
+    random_id = FloatField(null=False, unique=True, index=True)
     passed = BooleanField(null=False)
     content = TextField(null=False)
 
@@ -111,6 +113,7 @@ class ApplyResource(Resource):
 
         except peewee.DoesNotExist:
             apply_info = ApplyInfo(user_id=user.id)
+            apply_info.random_id = random.random()
 
             if isinstance(g.identity, identity.Super):
                 apply_info.passed = request_passed
