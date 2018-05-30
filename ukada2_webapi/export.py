@@ -111,11 +111,12 @@ def export_to_domjudge():
         response.json(response.Forbidden)
     else:
         unknown_school = []
-        user_list = []
-        for user in get_user_list(unknown_school=unknown_school):
-            user_list.append(user.sql_escape())
-
+        raw_user_list = get_user_list(unknown_school=unknown_school)
         if len(unknown_school)==0:
+            user_list = []
+            for user in raw_user_list:
+                user_list.append(user.sql_escape())
+
             return render_template("domjudge.sql", school_list=school_list, user_list = user_list)
         else:
             response.json(response.Conflict, unknown_school=unknown_school)
@@ -128,26 +129,31 @@ def export_to_excel():
     else:
         unknown_school = []
         user_list = get_user_list(unknown_school=unknown_school)
+        if len(unknown_school)==0:
 
-        xls_column_name = ["队伍", "学校", "队名", "队长", "队员1", "队员2", "电话", "QQ"]
-        xls_column_content = ["team_id", "school", "name", "leader", "member1", "member2", "phone", "qq"]
+            xls_column_name = ["队伍", "学校", "队名", "队长", "队员1", "队员2", "电话", "QQ"]
+            xls_column_content = ["team_id", "school", "name", "leader", "member1", "member2", "phone", "qq"]
 
-        wbk = xlwt.Workbook()
-        sheet = wbk.add_sheet("报名数据")
-        for i, name in enumerate(xls_column_name):
-            sheet.write(0, i, name)
+            wbk = xlwt.Workbook()
+            sheet = wbk.add_sheet("报名数据")
+            for i, name in enumerate(xls_column_name):
+                sheet.write(0, i, name)
 
-        for user_index, user in enumerate(user_list):
-            for column_index, column_content in enumerate(xls_column_content):
-                if column_content=="team_id":
-                    grid_content = "t%d" % (user_index+1)
-                elif column_content=="school":
-                    grid_content = user.school.name
-                else:
-                    grid_content = getattr(user, column_content)
+            for user_index, user in enumerate(user_list):
+                for column_index, column_content in enumerate(xls_column_content):
+                    if column_content=="team_id":
+                        grid_content = "t%d" % (user_index+1)
+                    elif column_content=="school":
+                        grid_content = user.school.name
+                    else:
+                        grid_content = getattr(user, column_content)
 
-                sheet.write(user_index+1, column_index, grid_content)
+                    sheet.write(user_index+1, column_index, grid_content)
 
-        bytes = BytesIO()
-        wbk.save(bytes)
-        return bytes.getvalue()
+            bytes = BytesIO()
+            wbk.save(bytes)
+            return bytes.getvalue()
+
+        else:
+            response.json(response.Conflict, unknown_school=unknown_school)
+            assert False
