@@ -51,9 +51,11 @@
   <div *ngSwitchCase="applied_list_view.admin_view">
     <div style="float: right;">
       <div style="float: none; text-align: right;">
-        <button class="btn btn-primary" (click)="export_to_excel()">导出到Excel</button>
-        <br>
-        <button class="btn btn-primary" (click)="export_to_domjudge()">导出到DOMjudge</button>
+        <button style="margin-top: 1em;" class="btn btn-primary" (click)="export_to_excel()">导出到Excel</button>
+        <br/>
+        <button style="margin-top: 1em;" class="btn btn-primary" (click)="export_to_domjudge()">导出到DOMjudge</button>
+        <br/>
+        <button style="margin-top: 4em;" class="btn btn-danger" (click)="apply_list_rerandomize()">导出顺序重新随机排列</button>
       </div>
     </div>
     <div class="container">

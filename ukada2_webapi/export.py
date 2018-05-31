@@ -1,6 +1,7 @@
 import pymysql
 import xlwt
 from io import BytesIO
+from peewee import fn
 from flask import json, g, render_template
 from .util import response
 from .server import default_blueprint as bp, db_transaction_succeeded
@@ -159,3 +160,12 @@ def export_to_excel():
         else:
             response.json(response.Conflict, unknown_school=unknown_school)
             assert False
+
+@bp.route("/apply_list/rerandomize", methods=["POST"])
+def record_rerandomize():
+    if not isinstance(g.identity, identity.Super):
+        response.json(response.Forbidden)
+    else:
+        ApplyInfo.update(random_id=fn.Rand()).execute()
+        db_transaction_succeeded()
+        response.json(response.Success)

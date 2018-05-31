@@ -626,4 +626,38 @@ export class SharedService {
       }};
     })
   }
+  public http_apply_list_rerandomize(): Observable<any>{
+    return new Observable((observer) => {
+      let s_req: Subscription|undefined = undefined;
+      let s_user = this.user_info.subscribe(
+        next => {
+          if(next instanceof User){
+            let user = next;
+            if(user.priv_level==="Super"){
+              let headers = this.auth_header(user.token, user.priv_level);
+              s_req = this._http.post(api_url_base+"/apply_list/rerandomize",null, {
+                responseType: 'json',
+                headers: headers,
+              }).subscribe(
+                response => {
+                  observer.next(response);
+                  observer.complete();
+                },
+                error => {
+                  observer.error(user_operation_error.network_error);
+                },
+              );
+            }else{
+              observer.error(user_operation_error.permission_deniend);
+            }
+          }
+        },
+      );
+      return {unsubscribe() {
+        for(let s of [s_req, s_user]){
+          if(s instanceof Subscription)s.unsubscribe();
+        }
+      }};
+    })
+  }
 }

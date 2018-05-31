@@ -137,9 +137,26 @@ export class AppliedListComponent implements OnInit {
       error => {
         if(error===user_operation_error.network_error){
           this._message.error("导出失败：网络错误");
+        }else if(error===user_operation_error.unknown_school){
+          this._message.error("导出失败：存在无法识别的学校名称");
         }else{
           this._message.error("导出失败：未知错误");
         }
+      },
+    );
+  }
+  private apply_list_rerandomize(){
+    this._shared.http_apply_list_rerandomize().subscribe(
+      next => { },
+      error => {
+        if(error===user_operation_error.network_error){
+          this._message.error("操作失败：网络错误");
+        }else{
+          this._message.error("操作失败：未知错误");
+        }
+      },
+      () => {
+        this._message.success("导出顺序已重新排列");
       },
     );
   }
